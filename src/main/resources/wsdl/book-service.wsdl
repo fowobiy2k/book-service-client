@@ -1,0 +1,142 @@
+<wsdl:definitions	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.fowobi.com/spring/soap/api/bookservice" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  targetNamespace="http://www.fowobi.com/spring/soap/api/bookservice">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.fowobi.com/spring/soap/api/bookservice">
+            <xsd:element name="CreateBookRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="author" type="xsd:string"/>
+                        <xsd:element name="year" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="CreateBookResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="resp" type="xsd:string"/>
+                        <xsd:element maxOccurs="unbounded" name="errorMessage" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetBookByIdRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetBookByIdResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="book" type="tns:book"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetBooksRequest">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="GetBooksResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="unbounded" name="books" type="tns:book"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="book">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:int"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="author" type="xsd:string"/>
+                    <xsd:element name="year" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="CreateBookResponse">
+        <wsdl:part element="tns:CreateBookResponse" name="CreateBookResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetBooksResponse">
+        <wsdl:part element="tns:GetBooksResponse" name="GetBooksResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetBooksRequest">
+        <wsdl:part element="tns:GetBooksRequest" name="GetBooksRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetBookByIdRequest">
+        <wsdl:part element="tns:GetBookByIdRequest" name="GetBookByIdRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetBookByIdResponse">
+        <wsdl:part element="tns:GetBookByIdResponse" name="GetBookByIdResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="CreateBookRequest">
+        <wsdl:part element="tns:CreateBookRequest" name="CreateBookRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="BookServiceEndpoint">
+        <wsdl:operation name="CreateBook">
+            <wsdl:input message="tns:CreateBookRequest" name="CreateBookRequest"> </wsdl:input>
+            <wsdl:output message="tns:CreateBookResponse" name="CreateBookResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetBooks">
+            <wsdl:input message="tns:GetBooksRequest" name="GetBooksRequest"> </wsdl:input>
+            <wsdl:output message="tns:GetBooksResponse" name="GetBooksResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetBookById">
+            <wsdl:input message="tns:GetBookByIdRequest" name="GetBookByIdRequest"> </wsdl:input>
+            <wsdl:output message="tns:GetBookByIdResponse" name="GetBookByIdResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BookServiceEndpointSoap11" type="tns:BookServiceEndpoint">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="CreateBook">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="CreateBookRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="CreateBookResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetBooks">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="GetBooksRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetBooksResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetBookById">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="GetBookByIdRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetBookByIdResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BookServiceEndpointService">
+        <wsdl:port binding="tns:BookServiceEndpointSoap11" name="BookServiceEndpointSoap11">
+            <soap:address location="http://localhost:9090/tos"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
